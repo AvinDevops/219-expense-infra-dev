@@ -8,11 +8,21 @@ pipeline {
     }
 
     stages {
-        stage ('test') {
+        stage ('Init') {
             steps {
                 sh """
                 ls -ltr
                 """
+            }
+        }
+        stage ('Plan') {
+            steps {
+                echo 'This is test plan'
+            }
+        }
+        stage ('Depoly') {
+            steps {
+                echo 'This is test Deploy'
             }
         }
     }
