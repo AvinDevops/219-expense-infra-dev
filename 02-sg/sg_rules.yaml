@@ -1,0 +1,84 @@
+- name: SG Rules
+  sg:
+  - expense-dev-db
+  - expense-dev-backend
+  - expense-dev-app-alb
+  - expense-dev-frontend
+  - expense-dev-web-alb
+  - expense-dev-bastion
+  - expense-dev-vpn
+  db:
+  - name: db_backend
+    description: database accepting connection from backend
+    source: backend
+    port: 3306
+  - name: db_bastion
+    description: database accepting connection from bastion
+    source: bastion
+    port: 3306
+  - name: db_vpn
+    description: db accepting connection from vpn
+    source: vpn
+    port: 3306
+  backend:
+  - name: backend_app-alb
+    description: backend accepting connection from app-alb
+    source: app-alb
+    port: 8080
+  - name: backend_vpn_ssh
+    description: backend accepting connection from vpn_ssh
+    source: vpn_ssh
+    port: 22
+  - name: backend_vpn_http
+    description: backend accepting connection from vpn_http
+    source: vpn_http
+    port: 8080
+  - name: backend_bastion
+    description: backend accepting connection from bastion
+    source: bastion
+    port: 22
+  app-alb:
+  - name: app-alb_vpn
+    description: app-alb accepting connection from vpn
+    source: vpn
+    port: 80
+  - name: app-alb_frontend
+    description: app-alb accepting connection from frontend
+    source: frontend
+    port: 80
+  - name: app-alb_bastion
+    description: app-alb accepting connection from bastion
+    source: bastion
+    port: 80
+  frontend:
+  - name: frontend_web-alb
+    description: frontend accepting connection from web-alb
+    source: web-alb
+    port: 80
+  - name: frontend_bastion
+    description: frontend accepting connection from bastion
+    source: bastion
+    port: 22
+  - name: frontend_vpn
+    description: frontend accepting connection from vpn
+    source: vpn
+    port: 22
+  web-alb:
+  - name: web-alb_public_http
+    description: web-alb accepting connection from public_http
+    source: public_http
+    port: 80
+  - name: web-alb_public_https
+    description: web-alb accepting connection from public_https
+    source: public_https
+    port: 443
+  bastion:
+  - name: bastion_public
+    description: bastion accepting connection from public
+    source: public
+    port: 22
+  vpn:
+  - name: vpn_public
+    description: vpn accepting connection from public
+    source: public
+    port: 943, 443, 22, 1194
