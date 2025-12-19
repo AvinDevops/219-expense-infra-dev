@@ -27,5 +27,5 @@ variable "db_subnet_cidrs" {
 }
 
 variable "is_peering_required" {
-    default = false # to create we need to give true
+    default = true # to create we need to give true
 }
